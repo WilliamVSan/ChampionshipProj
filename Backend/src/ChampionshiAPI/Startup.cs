@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ChampionshiAPI.Data;
+using ChampionshiAPI.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -10,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 
 namespace ChampionshiAPI
@@ -27,7 +30,18 @@ namespace ChampionshiAPI
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllers();
+            services.Configure<ChampionshipDatabaseSettings>(
+                Configuration.GetSection(nameof(ChampionshipDatabaseSettings)));
+            
+            services.AddSingleton<IChampionshipDatabaseSettings>(sp =>
+                sp.GetRequiredService<IOptions<ChampionshipDatabaseSettings>>().Value);
+            
+            services.AddSingleton<MatchService>();
+            services.AddSingleton<PlayerService>();
+            
+            services.AddControllers()
+                .AddNewtonsoftJson(options => options.UseMemberCasing());
+                
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ChampionshiAPI", Version = "v1" });

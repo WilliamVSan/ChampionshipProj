@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ChampionshiAPI.Data;
 using ChampionshiAPI.Models;
+using ChampionshiAPI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -12,60 +14,63 @@ namespace ChampionshiAPI.Controllers
     [Route("api/[controller]")]
     public class MatchController : ControllerBase
     {
-        public IEnumerable<Match> _match = new Match[] {
-            new Match(){
-            MatchId = 1,
-            GameName = "Gartic",
-            PlayerList = new List<Player>
-            { 
-                new Player {
-                PlayerId = 1,
-                PlayerName = "Will",
-                Password = "Senha",
-                ImageURL = "https://i.pinimg.com/736x/21/18/54/2118543235117ee07b6301814c774a33.jpg",
-                TotalPoints = 0
-                },
-                new Player {
-                PlayerId = 2,
-                PlayerName = "Vih",
-                Password = "Senha",
-                ImageURL = "https://i.pinimg.com/736x/21/18/54/2118543235117ee07b6301814c774a33.jpg",
-                TotalPoints = 0
-                }
-           },
-           WinnerId = 2,
-           MatchDate = DateTime.Now.AddDays(2).ToString()
-           }
-        };
-        public MatchController()
+        private readonly MatchService _matchService;
+        public MatchController(MatchService matchService)
         {
+            _matchService = matchService;
+        }
 
-        }
         [HttpGet]
-        public IEnumerable<Match> Get()
-        {
-            return _match;
-        }
+        public ActionResult<List<Match>> Get() =>
+            _matchService.GetMatch();
         
-        [HttpGet("{id}")]
-        public IEnumerable<Match> GetMatchById(int id)
+        
+        [HttpGet("{id:length(24)}", Name = "GetMatch")]
+        public ActionResult<Match> Get(string id)
         {
-            return _match.Where(match => match.MatchId == id);
+            var match = _matchService.GetMatchById(id);
+
+            if (match == null)
+            {
+                return NotFound();
+            }
+            return match;
         }
         [HttpPost]
-        public string Post()
+        public ActionResult<Match> Post(Match match)
         {
-            return "Post example";
+            _matchService.CreateMatch(match);
+
+            return CreatedAtRoute("GetMatch", new { id = match.Id.ToString() }, match);
         }
-        [HttpPut("{id}")]
-        public string Put(int id)
+        [HttpPut("{id:length(24)}")]
+        public IActionResult Put(string id, Match matchIn)
         {
-            return $"Put example: {id}";
+            var match = _matchService.GetMatchById(id);
+
+            if (match == null)
+            {
+                return NotFound();
+            }
+
+            _matchService.UpdateMatch(id, matchIn);
+
+            return NoContent();
         }
-        [HttpDelete("{id}")]
-        public string Delete(int id)
+        [HttpDelete("{id:length(24)}")]
+        public IActionResult Delete(string id)
         {
-            return $"Delete example: {id}";
+            var match = _matchService.GetMatchById(id);
+
+            if (match == null)
+            {
+                return NotFound();
+            
+            }
+
+            _matchService.DeleteMatch(id);
+            
+            return NoContent();
         }
     }
 }
