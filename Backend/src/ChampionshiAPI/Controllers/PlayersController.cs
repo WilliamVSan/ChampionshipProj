@@ -10,11 +10,11 @@ namespace ChampionshiAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class PlayerController : ControllerBase
+    public class PlayersController : ControllerBase
     {
         private readonly PlayerService _playerService;
 
-        public PlayerController(PlayerService playerService)
+        public PlayersController(PlayerService playerService)
         {
             _playerService = playerService;
         }

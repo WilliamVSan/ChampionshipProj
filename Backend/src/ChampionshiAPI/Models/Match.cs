@@ -11,11 +11,11 @@ namespace ChampionshiAPI.Models
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string? Id { get; set; }
+        public string Id { get; set; }
         [BsonElement("Name")]
         public string GameName { get; set; }
         public List<string> PlayerList { get; set; }
-        public string? WinnerId { get; set; }
+        public string WinnerId { get; set; }
         public string MatchDate { get; set; }
     }
 }

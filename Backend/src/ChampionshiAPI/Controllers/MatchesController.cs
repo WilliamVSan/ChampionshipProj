@@ -12,10 +12,10 @@ namespace ChampionshiAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class MatchController : ControllerBase
+    public class MatchesController : ControllerBase
     {
         private readonly MatchService _matchService;
-        public MatchController(MatchService matchService)
+        public MatchesController(MatchService matchService)
         {
             _matchService = matchService;
         }

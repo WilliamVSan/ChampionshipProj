@@ -41,7 +41,9 @@ namespace ChampionshiAPI
             
             services.AddControllers()
                 .AddNewtonsoftJson(options => options.UseMemberCasing());
-                
+            
+            services.AddCors();//Adicionando Cors
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ChampionshiAPI", Version = "v1" });
@@ -63,6 +65,11 @@ namespace ChampionshiAPI
             app.UseRouting();
 
             app.UseAuthorization();
+
+            //Utilizando Cors e permitindo que qualquer acesso.
+            app.UseCors(x => x.AllowAnyHeader()//Independente da header
+                              .AllowAnyMethod()//Método (Get, Post, Put etc...)
+                              .AllowAnyOrigin());//E independente da origem
 
             app.UseEndpoints(endpoints =>
             {
