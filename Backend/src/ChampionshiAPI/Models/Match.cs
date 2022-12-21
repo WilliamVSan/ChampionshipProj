@@ -15,7 +15,9 @@ namespace ChampionshiAPI.Models
         [BsonElement("Name")]
         public string GameName { get; set; }
         public List<string> PlayerList { get; set; }
-        public string WinnerId { get; set; }
+        public string WinnerName { get; set; }
         public string MatchDate { get; set; }
+        public string LogoURL { get; set; }
+        
     }
 }

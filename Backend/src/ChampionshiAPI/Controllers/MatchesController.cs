@@ -36,6 +36,19 @@ namespace ChampionshiAPI.Controllers
             }
             return match;
         }
+
+        [HttpGet("{gameName}", Name = "GetMatchByName")]
+        public ActionResult<Match> GetMatchByName(string gameName){
+            var match = _matchService.GetMatchByGameName(gameName);
+
+            if (match == null)
+            {
+                return NotFound();
+            }
+            return match;
+        
+        }
+
         [HttpPost]
         public ActionResult<Match> Post(Match match)
         {
@@ -43,6 +56,7 @@ namespace ChampionshiAPI.Controllers
 
             return CreatedAtRoute("GetMatch", new { id = match.Id.ToString() }, match);
         }
+
         [HttpPut("{id:length(24)}")]
         public IActionResult Put(string id, Match matchIn)
         {
@@ -57,6 +71,7 @@ namespace ChampionshiAPI.Controllers
 
             return NoContent();
         }
+
         [HttpDelete("{id:length(24)}")]
         public IActionResult Delete(string id)
         {

@@ -17,12 +17,32 @@ namespace ChampionshiAPI.Services
             var database = client.GetDatabase(settings.DatabaseName);
             _matches = database.GetCollection<Match>(settings.MatchesCollectionName);
         }
-
+        /// <summary>
+        /// Busca todas as matches
+        /// </summary>
+        /// <returns></returns>
         public List<Match> GetMatch() =>
             _matches.Find(match => true).ToList();
+
+        /// <summary>
+        /// Busca uma match por um id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <typeparam name="Match"></typeparam>
+        /// <returns></returns>
         public Match GetMatchById(string id) =>
             _matches.Find<Match>(match => match.Id == id).FirstOrDefault();
         
+        /// <summary>
+        /// Busca uma match por nome do jogo
+        /// </summary>
+        /// <param name="gameName"></param>
+        /// <typeparam name="Match"></typeparam>
+        /// <returns></returns>
+        public Match GetMatchByGameName(string gameName) =>
+            _matches.Find<Match>(match => match.GameName == gameName).FirstOrDefault();
+        
+
         public Match CreateMatch(Match match)
         {
             _matches.InsertOne(match);

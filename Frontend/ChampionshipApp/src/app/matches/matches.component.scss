@@ -1,0 +1,17 @@
+$primary: #83B532;
+$secondary: #6045AF;
+
+@import "bootstrap";
+*{
+  font-size: small;
+}
+.btn-primary{
+  color: $secondary;
+}
+.thead-primary{
+  background-color: $primary;
+  color: white;
+}
+.btn-outline-secondary{
+  color: white;
+}

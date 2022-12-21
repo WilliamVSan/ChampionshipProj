@@ -1,3 +1,19 @@
 @import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 @import '../node_modules/ngx-bootstrap/datepicker/bs-datepicker.css';
 @import '../node_modules/@fortawesome/fontawesome-free/css/all.min.css';
+
+$primary: #83B532;
+$secondary: #6045AF;
+
+@font-face {
+  font-family: pixel;
+  src: url(assets/PressStart2P-Regular.ttf) format("opentype");
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'pixel', 'arial', sans-serif;
+}
+
+@import "bootstrap";

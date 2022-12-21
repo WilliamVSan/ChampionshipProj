@@ -26,6 +26,10 @@ namespace ChampionshiAPI.Controllers
         [HttpGet("{id:length(24)}", Name = "GetPlayer")]
         public ActionResult<Player> Get(string id) =>
             _playerService.GetPlayerById(id);
+
+        [HttpGet("{name}", Name = "GetByName")]
+        public ActionResult<Player> GetByName(string name) =>
+            _playerService.GetPlayerByName(name);
         
         [HttpPost]
         public ActionResult<Player> Post(Player player)

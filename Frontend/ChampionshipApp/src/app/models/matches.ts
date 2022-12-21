@@ -1,9 +1,8 @@
-import { Player } from "./players";
-
 export class Match {
-    id!: string;
-    gameName!: string;
-    playerList!: Array<Player>;
-    winnerId!: string;
-    matchDate!: string;
+    _id!: string;
+    Name!: string;
+    PlayerList!: Array<string>;
+    WinnerName!: string;
+    MatchDate!: string;
+    LogoURL!: string;
 }

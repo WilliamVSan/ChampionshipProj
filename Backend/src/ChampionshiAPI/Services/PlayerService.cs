@@ -25,6 +25,9 @@ namespace ChampionshiAPI.Services
         
         public Player GetPlayerById(string id) =>
             _players.Find<Player>(player => player.Id == id).FirstOrDefault();
+        
+        public Player GetPlayerByName(string name) =>
+            _players.Find<Player>(player => player.PlayerName == name).FirstOrDefault();
 
         public Player CreatePlayer(Player player)
         {

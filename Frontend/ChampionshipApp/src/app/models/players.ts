@@ -1,7 +1,8 @@
 export class Player{
-    id!: string;
-    playerName!: string;
-    imageURL!: string;
-    totalPoints!: number;
+    _id!: string;
+    PlayerName!: string;
+    Password!: string;
+    ImageURL!: string;
+    TotalPoints!: number;
 
 }

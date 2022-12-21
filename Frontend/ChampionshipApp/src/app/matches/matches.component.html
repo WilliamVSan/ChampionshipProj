@@ -1,11 +1,54 @@
-<h2>Matches Components</h2>
-
-<div *ngFor="let match of matches">
-    <p><b>Jogo:</b> {{match.GameName}}</p>
-    <p><b>Id:</b> {{match.Id}}</p>
-    <p><b>Data:</b> {{match.MatchDate }}</p>
-    <hr>
+<h2>Matches</h2>
+<hr />
+<div class="form-inline">
 </div>
-<h2 id="byId">By Id</h2>
-
-
+<table class="table table-striped">
+  <thead class="thead-primary">
+    <tr>
+      <th>
+        <div class="form-group mb-2">
+          <input
+          type="text"
+          class="form-control mr-2"
+          placeholder="Filtrar"
+          size="5"
+          [(ngModel)]="filtroLista"
+          />
+        </div>
+      </th>
+      <th>Jogos</th>
+      <th>Vencedores</th>
+      <th>Data</th>
+      <th>Participantes</th>
+    </tr>
+  </thead>
+  <tbody *ngIf="matches && matches.length">
+    <tr *ngFor="let match of matchesFiltrados">
+      <td>
+        <img
+          src="/assets/{{ match.LogoURL }}"
+          [style.width.px]="logoWidth"
+        />
+      </td>
+      <td><b>Jogo:</b> {{ match.GameName }}</td>
+      <td><b>Vencedor:</b> {{match.WinnerName}} </td>
+      <td><b>Data:</b> {{ match.MatchDate }}</td>
+      <td>
+        <button
+          type="button"
+          class="btn btn-secondary"
+          (click)="showInformations()"
+        >
+          {{ !showInfo ? "Participantes" : "Ocultar" }}
+        </button>
+      </td>
+    </tr>
+  </tbody>
+  <tfoot *ngIf="!matches.length">
+    <tr>
+      <td colspan="8" class="text-center">
+        <h4>Nenhuma partida encontrada</h4>
+      </td>
+    </tr>
+  </tfoot>
+</table>

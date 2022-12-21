@@ -1,9 +1,12 @@
-<div class="container">
-  <h1>Players</h1>
-  <app-players></app-players>
+<div class="container-fluid g-0">
+  <app-header (sideNavToggled)="sideNavStatus = $event;"
+  ></app-header>
 
-  <h1>Matches</h1>
-  <app-matches></app-matches>
-
+  <main>
+    <app-sidebar [sideNavStatus]="sideNavStatus" [ngClass]="{'app-side-nav-open': sideNavStatus}"></app-sidebar>
+    <div class="display-area p-3" [ngClass]="{'display-area-shrink': sideNavStatus}">
+      <app-matches></app-matches>
+    </div>
+  </main>
   <router-outlet></router-outlet>
 </div>
