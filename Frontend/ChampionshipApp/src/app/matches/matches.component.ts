@@ -1,7 +1,12 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { Match } from '../models/matches';
-import { Player } from '../models/players';
+import { Component, OnInit, TemplateRef } from '@angular/core';
+
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
+
+import { Match } from '../models/Matches';
+import { Player } from '../models/Players';
 import { MatchService } from '../services/matches.service';
 import { PlayerService } from '../services/players.service';
 
@@ -11,60 +16,88 @@ import { PlayerService } from '../services/players.service';
   styleUrls: ['./matches.component.scss'],
 })
 export class MatchesComponent implements OnInit {
-  public matches: any = [];
-  public matchesFiltrados: any = [];
-  public players: any = [];
+  public matches: Match[] = [];
+  public matchesFiltrados: Match[] = [];
+  public players: Player[] = [];
+  public modalRef!: BsModalRef;
 
-  logoWidth: number = 70;
+  logoWidth: number = 120;
   showInfo: boolean = false;
-  private _filtroLista: string = "";
+  private _filtroLista: string = '';
 
-  public get filtroLista(){
+  public get filtroLista() {
     return this._filtroLista;
   }
 
   public set filtroLista(value: string) {
     this._filtroLista = value;
-    this.matchesFiltrados = this.filtroLista ? this.filtrarMatches(this.filtroLista) : this.matches;
+    this.matchesFiltrados = this.filtroLista
+      ? this.filtrarMatches(this.filtroLista)
+      : this.matches;
   }
 
-  filtrarMatches(filtrarPor: string): any {
+  filtrarMatches(filtrarPor: string): Match[] {
     filtrarPor = filtrarPor.toLocaleLowerCase();
-    return this.matches.filter((match: { GameName: string; WinnerName: string}) =>
-      match.GameName.toLocaleLowerCase().indexOf(filtrarPor) !== -1 ||
-      match.WinnerName.toLocaleLowerCase().indexOf(filtrarPor) !== -1
-
-      );
-
+    return this.matches.filter(
+      (match: { GameName: string; WinnerName: string }) =>
+        match.GameName.toLocaleLowerCase().indexOf(filtrarPor) !== -1 ||
+        match.WinnerName.toLocaleLowerCase().indexOf(filtrarPor) !== -1
+    );
   }
 
-  constructor(private matchService: MatchService, private playerService: PlayerService){}
+  constructor(
+    private matchService: MatchService,
+    private playerService: PlayerService,
+    private modalService: BsModalService,
+    private toastr: ToastrService,
+    private spinner: NgxSpinnerService
+  ) {}
 
   //Dentro do ngOnInit, podemos colocar métodos que serão inicializados antes de valores serem atribuidos ao nosso HTML
-  ngOnInit(): void {
+  public ngOnInit(): void {
+    this.spinner.show();
+    setTimeout(() => {
+      /** spinner ends after 5 seconds */
+    }, 3500);
     this.getMatches();
     this.getPlayers();
+    /** spinner starts on init */
   }
 
-  getMatches(){
-    this.matchService.getAllMatches().subscribe(matches =>
-       this.matches = matches,
-       error => console.log(error));
-  }
-  getPlayers(){
-    this.playerService.getAllPlayers().subscribe(players => {
-      this.players = players;
-      this.matchesFiltrados = this.matches;
+  public getMatches() {
+    this.matchService.getAllMatches().subscribe({
+      next: (matches: Match[]) => {
+        this.matches = matches;
+        this.matchesFiltrados = this.matches;
       },
-      error => console.log(error));
+      error: (error: any) => {
+        console.log(error);
+        this.toastr.error('Erro ao carregar as partidas.', 'Error');
+        this.spinner.hide();
+      },
+      complete: () => {
+        this.spinner.hide();
+      },
+    });
+  }
+  public getPlayers() {
+    this.playerService.getAllPlayers().subscribe({
+      next: (players: Player[]) => {
+        this.players = players;
+      },
+      error: (error: any) => {
+        console.log(error);
+        this.toastr.error('Erro ao carregar as partidas.', 'Error');
+        this.spinner.hide();
+      },
+      complete: () => {
+        this.spinner.hide();
+      },
+    });
   }
 
-  showInformations(){
+  public openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
     this.showInfo = !this.showInfo;
   }
-
 }
-
-
-
-

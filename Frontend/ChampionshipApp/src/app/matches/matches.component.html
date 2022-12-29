@@ -1,45 +1,68 @@
 <h2>Matches</h2>
 <hr />
-<div class="form-inline">
-</div>
+<div class="form-inline"></div>
 <table class="table table-striped">
   <thead class="thead-primary">
     <tr>
       <th>
         <div class="form-group mb-2">
           <input
-          type="text"
-          class="form-control mr-2"
-          placeholder="Filtrar"
-          size="5"
-          [(ngModel)]="filtroLista"
+            type="text"
+            class="form-control mr-2"
+            placeholder="Filtrar"
+            size="6"
+            [(ngModel)]="filtroLista"
           />
         </div>
       </th>
       <th>Jogos</th>
       <th>Vencedores</th>
-      <th>Data</th>
-      <th>Participantes</th>
+      <th></th>
+      <th>Mais</th>
     </tr>
   </thead>
   <tbody *ngIf="matches && matches.length">
     <tr *ngFor="let match of matchesFiltrados">
-      <td>
-        <img
-          src="/assets/{{ match.LogoURL }}"
-          [style.width.px]="logoWidth"
-        />
-      </td>
+      <td></td>
       <td><b>Jogo:</b> {{ match.GameName }}</td>
-      <td><b>Vencedor:</b> {{match.WinnerName}} </td>
-      <td><b>Data:</b> {{ match.MatchDate }}</td>
+      <td><b>Vencedor:</b> {{ match.WinnerName }}</td>
+      <td>
+        <ng-template #template>
+          <div class="modal-header">
+            <img
+                class="imgLogo"
+                src="/assets/{{ match.LogoURL }}"
+                [style.width.px]="logoWidth"
+              />
+            <h4 class="modal-title pull-left"><p class="title"> Data: {{ match.MatchDate | DateFormatPipe }} </p></h4>
+            <button
+              type="button"
+              class="close pull-right"
+              aria-label="Close"
+              (click)="modalRef.hide()"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <td><b>Vencedor:</b> {{ match.WinnerName }}</td>
+            <hr>
+            <td><b>Participantes:</b></td>
+            <tr *ngFor="let player of match.PlayerList">
+              <td>{{player}}</td>
+            </tr>
+          </div>
+        </ng-template>
+      </td>
       <td>
         <button
           type="button"
           class="btn btn-secondary"
-          (click)="showInformations()"
+          tooltip="Exibir mais informações"
+          (click)="openModal(template)"
         >
-          {{ !showInfo ? "Participantes" : "Ocultar" }}
+        <i class="fa-sharp fa-solid fa-eye"></i>
+
         </button>
       </td>
     </tr>

@@ -18,7 +18,7 @@ export class SidebarComponent implements OnInit {
     {
       number: '2',
       name: 'Profile',
-      icon: 'fa-solid fa-user'
+      icon: 'fa-solid fa-user-large'
     },
     {
       number: '3',

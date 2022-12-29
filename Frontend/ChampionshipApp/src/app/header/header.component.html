@@ -1,43 +1,32 @@
 <nav class="navbar navbar-expand navbar-dark bg-primary px-2">
-  <div class="side-nav-button p-2 me-3 text-light" (click)="sideNavToggle()">
-    <i class="fa-solid fa-bars"></i>
+  <div class="container-fluid">
+    <div class="side-nav-button p-2 me-3 text-light" (click)="sideNavToggle()">
+      <i class="fa-solid fa-bars"></i>
+    </div>
+    <div
+      class="collapse navbar-collapse"
+      [collapse]="isCollapsed"
+      [isAnimated]="true"
+      id="navbarSupportedContent"
+    >
+      <a class="navbar-brand px-4" href="#">BA</a>
+        <ul class="navbar-nav me-auto">
+          <li>
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+            >
+              Menu
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark">
+              <li><a class="dropdown-item" href="#">Child 1</a></li>
+              <li><a class="dropdown-item" href="#">Child 2</a></li>
+              <li><a class="dropdown-item" href="#">Child 3</a></li>
+            </ul>
+          </li>
+        </ul>
+    </div>
   </div>
-
-  <a class="navbar-brand px-4" href="#">Navbar</a>
-
-  <div class="navbar-collapse">
-    <ul class="navbar-nav me-auto">
-      <li>
-        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-          Menu 1
-        </a>
-        <ul class="dropdown-menu dropdown-menu-dark">
-          <li><a class="dropdown-item" href="#">Child 1</a></li>
-          <li><a class="dropdown-item" href="#">Child 2</a></li>
-          <li><a class="dropdown-item" href="#">Child 3</a></li>
-        </ul>
-      </li>
-      <li>
-        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-          Menu 2
-        </a>
-        <ul class="dropdown-menu dropdown-menu-dark">
-          <li><a class="dropdown-item" href="#">Child 1</a></li>
-          <li><a class="dropdown-item" href="#">Child 2</a></li>
-          <li><a class="dropdown-item" href="#">Child 3</a></li>
-        </ul>
-      </li>
-      <li>
-        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-          Menu 3
-        </a>
-        <ul class="dropdown-menu dropdown-menu-dark">
-          <li><a class="dropdown-item" href="#">Child 1</a></li>
-          <li><a class="dropdown-item" href="#">Child 2</a></li>
-          <li><a class="dropdown-item" href="#">Child 3</a></li>
-        </ul>
-      </li>
-    </ul>
-  </div>
-
 </nav>

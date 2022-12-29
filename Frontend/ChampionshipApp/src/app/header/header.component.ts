@@ -9,6 +9,7 @@ export class HeaderComponent implements OnInit {
 
   @Output() sideNavToggled = new EventEmitter<boolean>();
   menuStatus: boolean = false;
+  isCollapsed = true;
 
   constructor() { }
 

@@ -16,3 +16,12 @@ nav {
   background-color: $secondary;
   border-radius: 10px;
 }
+.navbar-brand{
+  font-size: 30px;
+  color: white;
+  text-shadow: 2px 2px 0 #6045AF;
+}
+.navbar-brand:hover{
+  color: #6045AF;
+  text-shadow: 2px 2px 0 white;;
+}

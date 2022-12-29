@@ -1,13 +1,11 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { Player } from "../models/players";
+import { Player } from "../models/Players";
 
 var httpOptions = {headers: new HttpHeaders({"Content-Type": "application/json"})};
 
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable()
 export class PlayerService {
 
   url = "https://localhost:5001/api/Players"

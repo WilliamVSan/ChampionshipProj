@@ -2,6 +2,9 @@
 @import '../node_modules/ngx-bootstrap/datepicker/bs-datepicker.css';
 @import '../node_modules/@fortawesome/fontawesome-free/css/all.min.css';
 
+// regular style toast
+@import 'ngx-toastr/toastr';
+
 $primary: #83B532;
 $secondary: #6045AF;
 
