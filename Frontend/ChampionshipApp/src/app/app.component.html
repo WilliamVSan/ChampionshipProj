@@ -4,11 +4,10 @@
 
   <main>
     <app-sidebar [sideNavStatus]="sideNavStatus" [ngClass]="{'app-side-nav-open': sideNavStatus}"></app-sidebar>
-    <div class="display-area p-3" [ngClass]="{'display-area-shrink': sideNavStatus}">
-      <app-matches></app-matches>
+    <div class="display-area" [ngClass]="{'display-area-shrink': sideNavStatus}">
+      <router-outlet></router-outlet>
     </div>
   </main>
-  <router-outlet></router-outlet>
 </div>
 <ngx-spinner
 type="ball-8bits"

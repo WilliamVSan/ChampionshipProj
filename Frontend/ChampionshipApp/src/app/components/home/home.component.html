@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <div class="screen">
+    <div class="responsive">
+      <head>
+        <title>linxea.github.io</title>
+        <meta charset="utf-8" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1 maximum-scale=1.0 user-scalable=no"
+        />
+        <link
+          href="https://fonts.googleapis.com/css?family=Press+Start+2P|Permanent+Marker"
+          rel="stylesheet"
+        />
+      </head>
+
+      <body>
+        <section class="splash-screen load">
+          <div class="title">
+            <h1 class="title-top"><span class="big">A</span>ccreditation</h1>
+            <h1 class="title-bottom"><span class="big">M</span>anagement</h1>
+          </div>
+
+          <div class="buttons grey-with-red">
+            <a routerLink="/matches" class="purple-with-blue">Push start button</a>
+            <a routerLink="/login" class="button-hover">Login</a>
+            <a>or</a>
+            <a routerLink="/register" class="button-hover">Register</a>
+          </div>
+        </section>
+        <script></script>
+      </body>
+    </div>
+    <!-- Players -->
+    <div class="players">
+      <div class="form-inline">
+        Top Jogadores
+        <th class="fa-solid fa-award"></th>
+      </div>
+      <table class="table table-striped">
+        <thead class="thead-primary">
+          <tr>
+            <th>Jogadores</th>
+            <th>Pontos</th>
+          </tr>
+        </thead>
+        <tbody class="tbody-primary" *ngIf="players && players.length">
+          <tr *ngFor="let player of orderPlayers(players)">
+            <td>{{ player.PlayerName }}</td>
+            <td>{{ player.TotalPoints }}</td>
+          </tr>
+        </tbody>
+        <tbody class="tbody-secondary" *ngIf="!players.length">
+          <tr>
+            <td colspan="8" class="text-center">
+              <h5>Nenhuma jogador encontrado</h5>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</html>

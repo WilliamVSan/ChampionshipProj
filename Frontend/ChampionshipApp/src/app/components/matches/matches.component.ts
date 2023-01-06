@@ -5,10 +5,10 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 
-import { Match } from '../models/Matches';
-import { Player } from '../models/Players';
-import { MatchService } from '../services/matches.service';
-import { PlayerService } from '../services/players.service';
+import { Match } from '../../models/Matches';
+import { Player } from '../../models/Players';
+import { MatchService } from '../../services/matches.service';
+import { PlayerService } from '../../services/players.service';
 
 @Component({
   selector: 'app-matches',

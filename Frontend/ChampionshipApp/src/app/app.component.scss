@@ -1,21 +1,28 @@
 $primary: #83B532;
 $secondary: #6045AF;
+$black: #343A40;
 
 .container-fluid{
   margin: 0;
   padding: 0;
+  background-color: #343A40!important;
 }
 .display-area{
   position: absolute;
   display: flex;
   left: 60px;
   width: calc(100% - 60px);
+  height: 100%;
   transition: left 250ms ease-in, width 250ms ease-in;
+
 }
 .display-area-shrink{
   position: absolute;
-  left: 250px;
-  width: calc(100% - 250px);
+  left: 234px;
+  width: calc(100% - 234px);
+  router-outlet{
+    width: 30px;
+  }
 }
 .app-side-nav-open{
   width: 250px;
@@ -28,22 +35,22 @@ app-header{
   height: 4rem;
   z-index: 2;
 }
-main{
-  position: absolute;
-  width: 100%;
-  top: 4rem;
-  z-index: 1;
-}
 app-sidebar{
   position: absolute;
   left: 0rem;
   width: 60px;
-  height: calc(100vh - 4rem);
+  height: calc(100vh - 3.9rem);
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-  background-color: $primary;
+  background-color: $black;
   border-top: 1px solid $secondary;
   border-bottom: 2px solid white;
   overflow-x: hidden;
   white-space: nowrap;
   transition: width 250ms ease-in;
+}
+main{
+  position: absolute;
+  width: 100%;
+  top: 4rem;
+  z-index: 1;
 }

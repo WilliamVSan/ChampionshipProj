@@ -2,6 +2,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { CollapseModule } from 'ngx-bootstrap/collapse';
@@ -12,17 +13,21 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { ToastrModule } from 'ngx-toastr';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PlayersComponent } from './players/players.component';
-import { MatchesComponent } from './matches/matches.component';
-import { NavComponent } from './nav/nav.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
-import { HeaderComponent } from './header/header.component';
+import { PlayersComponent } from './components/players/players.component';
+import { MatchesComponent } from './components/matches/matches.component';
+import { NavComponent } from './shared/nav/nav.component';
+import { SidebarComponent } from './shared/sidebar/sidebar.component';
+import { HeaderComponent } from './shared/header/header.component';
+import { HomeComponent } from './components/home/home.component';
+import { TitleComponent } from './shared/title/title.component';
+
 import { MatchService } from './services/matches.service';
 import { PlayerService } from './services/players.service';
 
 import { DateTimeFormatPipe } from './helpers/DateTimeFormat.pipe';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +37,10 @@ import { DateTimeFormatPipe } from './helpers/DateTimeFormat.pipe';
     NavComponent,
     SidebarComponent,
     HeaderComponent,
+    HomeComponent,
+    TitleComponent,
+    LoginComponent,
+    RegisterComponent,
     DateTimeFormatPipe
   ],
   imports: [

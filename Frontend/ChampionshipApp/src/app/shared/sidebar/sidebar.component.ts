@@ -13,27 +13,32 @@ export class SidebarComponent implements OnInit {
     {
       number: '1',
       name: 'Home',
-      icon: 'fa-solid fa-house'
+      icon: 'fa-solid fa-house',
+      route: 'home'
     },
     {
       number: '2',
       name: 'Profile',
-      icon: 'fa-solid fa-user-large'
+      icon: 'fa-solid fa-user-large',
+      route: 'profile'
     },
     {
       number: '3',
       name: 'Teams',
-      icon: 'fa-solid fa-users'
+      icon: 'fa-solid fa-users',
+      route: 'teams'
     },
     {
       number: '4',
       name: 'Matches',
-      icon: 'fa-solid fa-gamepad'
+      icon: 'fa-solid fa-gamepad',
+      route: 'matches'
     },
     {
       number: '5',
       name: 'Ranking',
-      icon: 'fa-solid fa-trophy'
+      icon: 'fa-solid fa-trophy',
+      route: 'ranking'
     }
   ]
 

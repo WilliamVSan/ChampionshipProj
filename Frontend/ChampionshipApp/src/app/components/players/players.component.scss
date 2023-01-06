@@ -1,0 +1,41 @@
+$primary: #83B532;
+$secondary: #6045AF;
+$black: #343A40;
+
+@import "bootstrap";
+*{
+  font-size: small;
+}
+.btn-primary{
+  color: $secondary;
+}
+.thead-primary{
+  background-color: $black;
+  color: white;
+  height: 50px;
+}
+.tbody-primary{
+  width: 270px;
+}
+.tbody-secondary{
+  width: 270px;
+}
+.btn-outline-secondary{
+  color: white;
+}
+.form-inline{
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white !important;
+  background-color: $black;
+  border-top: white 1px solid;
+  width: 100%;
+}
+tr{
+  width: 100px !important;
+}
+.fa-solid {
+  margin-left: 10px;
+}

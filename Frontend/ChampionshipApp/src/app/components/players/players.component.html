@@ -1,0 +1,23 @@
+<div class="form-inline">Top Players <th class="fa-solid fa-award"></th></div>
+<table class="table table-striped">
+  <thead class="thead-primary">
+    <tr>
+      <th>Jogadores</th>
+      <th>Pontos</th>
+    </tr>
+  </thead>
+    <tbody class="tbody-primary" *ngIf="players && players.length">
+      <tr *ngFor="let player of orderPlayers(players)">
+        <td>{{ player.PlayerName }}</td>
+        <td>{{ player.TotalPoints }}</td>
+      </tr>
+    </tbody>
+    <tbody class="tbody-secondary" *ngIf="!players.length">
+      <tr>
+        <td colspan="8" class="text-center">
+          <h5>Nenhuma jogador encontrado</h5>
+        </td>
+      </tr>
+    </tbody>
+</table>
+

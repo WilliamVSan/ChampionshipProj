@@ -1,0 +1,257 @@
+$primary: #83B532;
+$secondary: #6045AF;
+$black: #343A40;
+
+@import "bootstrap";
+*{
+  font-size: small;
+}
+
+body {
+  color: white;
+  font-family: "Press Start 2P", monospace;
+  background-color: #0D122B;
+  font-size: 1rem;
+  text-align: center;
+  text-transform: uppercase;
+  width: 100%;
+  margin: 0;
+}
+
+body:before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 91.9vh;
+  background: repeating-linear-gradient(#0D122B, #0D122B 2px, #565B73 2px, #565B73 4px);
+  opacity: 0.2;
+  z-index: 100;
+  content: "";
+  pointer-events: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+h1 {
+  margin: 0;
+}
+
+.splash-screen {
+  width: 100%;
+  height: 91.9vh;
+  display: block;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  margin: auto;
+  font-family: "Permanent Marker", monospace;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  height: 50vh;
+  font-size: 2rem;
+  line-height: 0.75;
+  word-break: break-word;
+  max-width: 580px;
+}
+
+.title h1 {
+  background: -webkit-linear-gradient(rgb(255, 18, 18) 30%, rgb(255, 215, 38));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.title-top {
+  transform: skew(-10deg) rotate(-10deg) translateX(-2rem);
+}
+
+.title-bottom {
+  transform: skew(-10deg) rotate(-10deg) translateX(1rem);
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 50vh;
+  margin: auto;
+
+}
+
+.buttons a {
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.bottom {
+  display: flex;
+  flex-direction: column;
+  height: 10vh;
+}
+
+.grey-with-red {
+  color: rgb(192, 192, 192);
+  text-shadow: 2px 2px 0 rgb(192, 11, 11);
+}
+
+.purple-with-blue {
+  color: rgb(147, 154, 255);
+  text-shadow: 2px 2px 0 rgb(47, 61, 255);
+}
+.purple-with-blue:hover{
+  background-color: white !important;
+  width: 450px;
+  color: #0D122B !important;
+  animation: pulse 1s infinite;
+  animation-timing-function: linear;
+  cursor: pointer;
+}
+.button-hover:hover {
+  background-color: white !important;
+  animation: pulse 1s infinite;
+  animation-timing-function: linear;
+  width: 450px;
+  color: #0D122B !important;
+  cursor: pointer;
+}
+.yellow-with-darkyellow {
+  color: rgb(226, 179, 24);
+  text-shadow: 0 2px 0 rgb(107, 77, 11), 2px 0 0 rgb(151, 109, 19),
+    2px 2px 0 rgb(151, 109, 19);
+}
+
+.yellow {
+  color: rgb(226, 179, 24);
+}
+
+.big {
+  font-size: 6rem;
+}
+
+@media (min-width: 400px) {
+  body {
+    font-size: 1.2rem;
+  }
+
+  .big {
+    font-size: 7rem;
+  }
+}
+
+@media (min-width: 600px) {
+  .big {
+    font-size: 5rem;
+  }
+
+  .title {
+    font-size: 3rem;
+    height: 50vh;
+  }
+
+  .buttons {
+    height: 40vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .title-top {
+    transform: skew(-10deg) rotate(-10deg) translateX(-2rem);
+  }
+
+  .title-bottom {
+    transform: skew(-10deg) rotate(-10deg) translateX(3rem);
+  }
+}
+
+@media (min-width: 800px) {
+  .credit {
+    position: absolute;
+    right: 50px;
+    margin-top: 0;
+  }
+}
+
+/* Stole this idea from twilioquest, it's freaking sick. */
+.load {
+  animation: load 1800ms 700ms backwards;
+}
+
+@keyframes load {
+  0% {
+    filter: blur(2px) hue-rotate(-150deg);
+  }
+}
+
+::selection {
+  background: #b4fdff;
+}
+
+::-moz-selection {
+  background: #b4fdff;
+}
+#container {
+  width: 100%;
+  background: hotpink;
+  aspect-ratio: 100 / 29;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+//Players
+.btn-primary{
+  color: $secondary;
+}
+.thead-primary{
+  background-color: $black;
+  color: white;
+}
+.tbody-primary{
+  width: 270px;
+}
+.tbody-secondary{
+  width: 270px;
+}
+.btn-outline-secondary{
+  color: white;
+}
+.form-inline{
+  text-align: center;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white !important;
+  background-color: $black;
+  border-top: white 1px solid;
+  width: 100%;
+}
+tr{
+  width: 50px !important;
+}
+.fa-solid {
+  margin-left: 10px;
+}
+.screen{
+  display: flex;
+  width: 94.3vw;
+}
+.players{
+  width: 20vw;
+}
+.responsive{
+  width: 80vw;
+}
