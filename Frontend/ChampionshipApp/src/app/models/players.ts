@@ -4,4 +4,12 @@ export interface Player{
     Password: string;
     ImageURL: string;
     TotalPoints: number;
+    Wins: number;
+}
+export interface PlayerResponse{
+  _id: string;
+  PlayerName: string;
+  ImageURL: string;
+  TotalPoints: number;
+  Wins: number;
 }

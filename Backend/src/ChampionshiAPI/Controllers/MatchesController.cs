@@ -21,7 +21,7 @@ namespace ChampionshiAPI.Controllers
         }
 
         [HttpGet]
-        public ActionResult<List<Match>> Get() =>
+        public ActionResult<List<MatchResponse>> Get() =>
             _matchService.GetMatch();
         
         

@@ -1,0 +1,41 @@
+$primary: #83B532;
+$secondary: #6045AF;
+$black: #343A40;
+
+.form-control{
+  width: 115px;
+}
+
+.btn-primary{
+  color: $secondary;
+}
+.thead-primary{
+  background-color: $black;
+  color: white;
+}
+.btn-outline-secondary{
+  color: white;
+}
+.modal-header{
+  background-color: #6045AF;
+  color: white;
+  height: 75px;
+}
+.title{
+  font-size: 10px;
+}
+input[type="text"]
+{
+    font-size:13px;
+}
+
+.imgLogo{
+  margin-right: 30px;
+}
+.history{
+  background-color: $black;
+  color: white;
+  text-align: center;
+  margin-bottom: 0px;
+  padding: 5px;
+}

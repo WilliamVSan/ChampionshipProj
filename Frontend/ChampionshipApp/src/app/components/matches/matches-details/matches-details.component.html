@@ -1,0 +1,22 @@
+<div class="container">
+<div class="card">
+  <div class="card-header">
+    <img
+      src="../../../../assets/{{matches[2].LogoURL}}"
+      alt="rover"
+    />
+  </div>
+  <div class="card-body">
+    <span class="tag tag-teal">FPS</span>
+    <h4>{{matches[2].GameName}}</h4>
+    <p>{{matches[2].Description}}</p>
+    <tr *ngFor="let player of matches[2].PlayerList">
+      <td><img class="user-img" src="{{player.ImageURL}}" alt="">{{player.PlayerName}}</td>
+    </tr>
+    <div class="user">
+      <button class="btn btn-primary" style="color: white;">Participar</button>
+      <button class="btn btn-primary" style="color: white;" (click)="detalheMatch(matches[2]._id)">Editar</button>
+      <i class="fa-solid fa-arrow-left" routerLink="/matches"></i>
+  </div>
+</div>
+</div>

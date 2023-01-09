@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Match } from '../models/Matches';
+import { Match, MatchResponse } from '../models/Matches';
 import { environment } from 'src/environments/environment';
 
 var httpOptions = {headers: new HttpHeaders({"Content-Type": "application/json"})};
@@ -12,8 +12,8 @@ export class MatchService {
 
     constructor(private http: HttpClient){}
 
-    getAllMatches(): Observable<Match[]> {
-        return this.http.get<Match[]>(`${environment.api}/matches`);
+    getAllMatches(): Observable<MatchResponse[]> {
+        return this.http.get<MatchResponse[]>(`${environment.api}/matches`);
     }
 
     getMatchesById(id: string): Observable<Match> {

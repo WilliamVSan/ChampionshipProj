@@ -1,19 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { BsModalRef } from 'ngx-bootstrap/modal';
+import { Component, OnInit, TemplateRef } from '@angular/core';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
-import { MatchResponse } from 'src/app/models/Matches';
+import { Match, MatchResponse } from 'src/app/models/Matches';
 import { Player } from 'src/app/models/Players';
 import { MatchService } from 'src/app/services/matches.service';
 import { PlayerService } from 'src/app/services/players.service';
 
 @Component({
-  selector: 'app-matches',
-  templateUrl: './matches.component.html',
-  styleUrls: ['./matches.component.scss'],
+  selector: 'app-matches-list',
+  templateUrl: './matches-list.component.html',
+  styleUrls: ['./matches-list.component.scss']
 })
-export class MatchesComponent implements OnInit {
+export class MatchesListComponent implements OnInit {
+
   public matches: MatchResponse[] = [];
   public matchesFiltrados: MatchResponse[] = [];
   public players: Player[] = [];
@@ -21,13 +21,34 @@ export class MatchesComponent implements OnInit {
 
   logoWidth: number = 120;
   showInfo: boolean = false;
+  private _filtroLista: string = '';
+
+  public get filtroLista() {
+    return this._filtroLista;
+  }
+
+  public set filtroLista(value: string) {
+    this._filtroLista = value;
+    this.matchesFiltrados = this.filtroLista
+      ? this.filtrarMatches(this.filtroLista)
+      : this.matches;
+  }
+
+  filtrarMatches(filtrarPor: string): MatchResponse[] {
+    filtrarPor = filtrarPor.toLocaleLowerCase();
+    return this.matches.filter(
+      (match: { GameName: string; WinnerName: string }) =>
+        match.GameName.toLocaleLowerCase().indexOf(filtrarPor) !== -1 ||
+        match.WinnerName.toLocaleLowerCase().indexOf(filtrarPor) !== -1
+    );
+  }
 
   constructor(
     private matchService: MatchService,
     private playerService: PlayerService,
+    private modalService: BsModalService,
     private toastr: ToastrService,
-    private spinner: NgxSpinnerService,
-    private router: Router
+    private spinner: NgxSpinnerService
   ) {}
 
   //Dentro do ngOnInit, podemos colocar métodos que serão inicializados antes de valores serem atribuidos ao nosso HTML
@@ -71,6 +92,11 @@ export class MatchesComponent implements OnInit {
         this.spinner.hide();
       },
     });
+  }
+
+  public openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
+    this.showInfo = !this.showInfo;
   }
 
 }

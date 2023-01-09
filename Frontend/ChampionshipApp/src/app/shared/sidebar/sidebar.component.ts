@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -20,7 +21,7 @@ export class SidebarComponent implements OnInit {
       number: '2',
       name: 'Profile',
       icon: 'fa-solid fa-user-large',
-      route: 'profile'
+      route: 'user/profile'
     },
     {
       number: '3',
@@ -42,9 +43,13 @@ export class SidebarComponent implements OnInit {
     }
   ]
 
-  constructor() { }
+  constructor(private router: Router) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
+  }
+
+  showMenu(): boolean {
+    return this.router.url != '/user/login';
   }
 
 }

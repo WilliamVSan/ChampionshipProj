@@ -11,19 +11,48 @@ namespace ChampionshiAPI.Services
     public class MatchService
     {
         private readonly IMongoCollection<Match> _matches;
-        public MatchService(IChampionshipDatabaseSettings settings)
+        private readonly PlayerService _playerService;
+        public MatchService(IChampionshipDatabaseSettings settings, PlayerService playerService)
         {
             var client = new MongoClient(settings.ConnectionString);
             var database = client.GetDatabase(settings.DatabaseName);
             _matches = database.GetCollection<Match>(settings.MatchesCollectionName);
+            _playerService = playerService;
         }
         /// <summary>
         /// Busca todas as matches
         /// </summary>
         /// <returns></returns>
-        public List<Match> GetMatch() =>
-            _matches.Find(match => true).ToList();
-
+        public List<MatchResponse> GetMatch()
+            => _matches
+                .Find(match => true)
+                .ToList()
+                .Select(match => new MatchResponse()
+                {
+                    Id = match.Id,
+                    GameName = match.GameName,
+                    Description = match.Description,
+                    WinnerName = match.WinnerName,
+                    MatchDate = match.MatchDate,
+                    LogoURL = match.LogoURL,
+                    Cover = match.Cover,
+                    PlayerList = match.PlayerList.Select(p => 
+                    {
+                        var player = _playerService.GetPlayerById(p);
+                        if (player == null){
+                            return null;
+                        }
+                        return new PlayerResponse()
+                        {
+                            Id = player.Id,
+                            PlayerName = player.PlayerName,
+                            ImageURL = player.ImageURL,
+                            TotalPoints = player.TotalPoints,
+                            Wins = player.Wins
+                        };
+                    }).ToList()
+                }).ToList();
+            
         /// <summary>
         /// Busca uma match por um id
         /// </summary>

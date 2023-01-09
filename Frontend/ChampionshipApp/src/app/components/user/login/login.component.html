@@ -1,0 +1,40 @@
+<div class="screen">
+  <div class="container" id="container">
+    <div class="form-container sign-up-container">
+      <form action="#">
+        <h1>Crie uma conta</h1>
+        <input type="text" placeholder="Nome" />
+        <input type="email" placeholder="Email" />
+        <input type="password" placeholder="Senha" />
+        <input type="password" placeholder="Confirmar Senha" />
+        <input type="text" placeholder="Imagem" />
+        <button class="register">Registrar</button>
+      </form>
+    </div>
+    <div class="form-container sign-in-container">
+      <form action="#">
+        <h1>Faça o Login</h1>
+        <input type="email" placeholder="Email" />
+        <input type="password" placeholder="Senha" />
+        <a href="#">Perdeu a sua senha?</a>
+        <button>Logar</button>
+      </form>
+    </div>
+    <div class="overlay-container">
+      <div class="overlay">
+        <div class="overlay-panel overlay-left">
+          <h1>Bem vindo de volta jogador!</h1>
+          <p>Já possúi uma conta? faça o seu login!</p>
+          <button class="ghost" id="signIn">Login</button>
+        </div>
+        <div class="overlay-panel overlay-right">
+          <h1>Olá, jogador!</h1>
+          <p>Não possui uma conta ainda? Clique no botão a baixo e registre-se!</p>
+          <button class="ghost" id="signUp" (click)="registerForm()">
+            Registrar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

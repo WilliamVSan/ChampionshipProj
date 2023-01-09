@@ -1,102 +1,25 @@
 <div class="screen">
+  <!-- Featured Match -->
   <div class="container">
     <div class="container-cards">
-      <a routerLink="/home">
+      <a routerLink="/matches/detail">
       <div class="cards">
           <div class="card card-one">
             <div class="card-header">
               <img
                 class="card-cover"
-                src="../../../assets/capas/{{ matches[1].Cover }}"
+                src="../../../assets/capas/{{matches[2].Cover}}"
                 alt=""
               />
             </div>
-            <h2 class="card-title">{{ matches[1].GameName }}</h2>
-            <p class="date">{{ matches[1].MatchDate }}</p>
-            <p class="description">{{ matches[1].Description }}</p>
+            <h2 class="card-title">{{matches[2].GameName}}</h2>
+            <p class="date">{{matches[2].MatchDate}}</p>
+            <p class="description">{{matches[2].Description}}</p>
           </div>
         </div>
       </a>
       </div>
   </div>
-  <div class="first-container">
-    <h3 class="history">Histórico</h3>
-    <table class="table table-striped">
-      <thead class="thead-primary">
-        <tr>
-          <th></th>
-          <th>
-            <div class="form-group mb-2">
-              <input
-                type="text"
-                class="form-control mr-2"
-                placeholder="Filtrar"
-                size="6"
-                [(ngModel)]="filtroLista"
-              />
-            </div>
-          </th>
-          <th>Vencedores</th>
-          <th></th>
-          <th>Mais</th>
-        </tr>
-      </thead>
-      <tbody *ngIf="matches && matches.length">
-        <tr *ngFor="let match of matchesFiltrados">
-          <td></td>
-          <td><b>Jogo:</b> {{ match.GameName }}</td>
-          <td><b>Vencedor:</b> {{ match.WinnerName }}</td>
-          <td>
-            <ng-template #template>
-              <div class="modal-header">
-                <img
-                  class="imgLogo"
-                  src="/assets/{{ match.LogoURL }}"
-                  [style.width.px]="logoWidth"
-                />
-                <h4 class="modal-title pull-left">
-                  <p class="title">
-                    Data: {{ match.MatchDate | DateFormatPipe }}
-                  </p>
-                </h4>
-                <button
-                  type="button"
-                  class="close pull-right"
-                  aria-label="Close"
-                  (click)="modalRef.hide()"
-                >
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <td><b>Vencedor:</b> {{ match.WinnerName }}</td>
-                <hr />
-                <td><b>Participantes:</b></td>
-                <tr *ngFor="let player of match.PlayerList">
-                  <td>{{ player }}</td>
-                </tr>
-              </div>
-            </ng-template>
-          </td>
-          <td>
-            <button
-              type="button"
-              class="btn btn-secondary"
-              tooltip="Exibir mais informações"
-              (click)="openModal(template)"
-            >
-              <i class="fa-sharp fa-solid fa-eye"></i>
-            </button>
-          </td>
-        </tr>
-      </tbody>
-      <tfoot *ngIf="!matches.length">
-        <tr>
-          <td colspan="8" class="text-center">
-            <h4>Nenhuma partida encontrada</h4>
-          </td>
-        </tr>
-      </tfoot>
-    </table>
-  </div>
+  <!-- Game History -->
+  <router-outlet></router-outlet>
 </div>

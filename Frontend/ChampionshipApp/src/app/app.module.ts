@@ -16,7 +16,6 @@ import { ToastrModule } from 'ngx-toastr';
 import { AppComponent } from './app.component';
 import { PlayersComponent } from './components/players/players.component';
 import { MatchesComponent } from './components/matches/matches.component';
-import { NavComponent } from './shared/nav/nav.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { HomeComponent } from './components/home/home.component';
@@ -26,22 +25,27 @@ import { MatchService } from './services/matches.service';
 import { PlayerService } from './services/players.service';
 
 import { DateTimeFormatPipe } from './helpers/DateTimeFormat.pipe';
-import { LoginComponent } from './components/login/login.component';
-import { RegisterComponent } from './components/register/register.component';
+import { MatchesDetailsComponent } from './components/matches/matches-details/matches-details.component';
+import { UserComponent } from './components/user/user.component';
+import { LoginComponent } from './components/user/login/login.component';
+import { RegistrationComponent } from './components/user/registration/registration.component';
+import { MatchesListComponent } from './components/matches/matches-list/matches-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PlayersComponent,
     MatchesComponent,
-    NavComponent,
     SidebarComponent,
     HeaderComponent,
     HomeComponent,
     TitleComponent,
+    DateTimeFormatPipe,
+    MatchesDetailsComponent,
+    UserComponent,
     LoginComponent,
-    RegisterComponent,
-    DateTimeFormatPipe
+    RegistrationComponent,
+    MatchesListComponent
   ],
   imports: [
     FormsModule,
