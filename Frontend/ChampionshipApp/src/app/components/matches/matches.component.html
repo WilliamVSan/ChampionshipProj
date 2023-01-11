@@ -2,19 +2,19 @@
   <!-- Featured Match -->
   <div class="container">
     <div class="container-cards">
-      <a routerLink="/matches/detail">
+      <a routerLink="/matches/detail/:id">
       <div class="cards">
           <div class="card card-one">
             <div class="card-header">
               <img
                 class="card-cover"
-                src="../../../assets/capas/{{matches[2].Cover}}"
+                src="../../../assets/capas/{{matches[2]?.Cover}}"
                 alt=""
               />
             </div>
-            <h2 class="card-title">{{matches[2].GameName}}</h2>
-            <p class="date">{{matches[2].MatchDate}}</p>
-            <p class="description">{{matches[2].Description}}</p>
+            <h2 class="card-title">{{matches[2]?.GameName}}</h2>
+            <p class="date">{{matches[2]?.MatchDate}}</p>
+            <p class="description">{{matches[2]?.Description}}</p>
           </div>
         </div>
       </a>

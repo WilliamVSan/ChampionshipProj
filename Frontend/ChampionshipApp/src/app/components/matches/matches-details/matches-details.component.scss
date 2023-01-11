@@ -12,6 +12,7 @@ body {
   color: #10182f;
 }
 .container {
+  border-top: $secondary 1px solid;
   background-color: $black;
   display: flex;
   width: 31.3vw;
@@ -86,9 +87,22 @@ body {
   background-color: $secondary;
   color: white;
   border-radius: 50%;
-  margin-left: 10px;
+  margin-left: 1.6vw;
   cursor: pointer;
 }
 .fa-arrow-left:hover{
   background-color: $black;
+}
+.btn-primary.confirm{
+  width: 100%;
+  font-size: 15px;
+  color: white;
+}
+
+.edit-title{
+  margin-top: 10px;
+  position: relative;
+  background: -webkit-linear-gradient(rgb(255, 18, 18) 30%, rgb(255, 215, 38));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }

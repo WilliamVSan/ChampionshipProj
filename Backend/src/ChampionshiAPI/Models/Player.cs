@@ -13,6 +13,7 @@ namespace ChampionshiAPI.Models
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
         public string PlayerName { get; set; }
+        public string Email { get; set; }
         public string Password { get; set; }
         public string ImageURL { get; set; }
         public int? TotalPoints { get; set; }

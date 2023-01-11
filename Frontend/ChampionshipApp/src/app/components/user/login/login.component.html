@@ -1,14 +1,73 @@
 <div class="screen">
   <div class="container" id="container">
     <div class="form-container sign-up-container">
-      <form action="#">
+      <form [formGroup]="formRegister">
         <h1>Crie uma conta</h1>
-        <input type="text" placeholder="Nome" />
-        <input type="email" placeholder="Email" />
-        <input type="password" placeholder="Senha" />
-        <input type="password" placeholder="Confirmar Senha" />
-        <input type="text" placeholder="Imagem" />
-        <button class="register">Registrar</button>
+        <input
+          formControlName="PlayerName"
+          type="text"
+          placeholder="Nome de usuário"
+          [ngClass]="{
+            'is-invalid': f.PlayerName!.errors && f.PlayerName!.touched
+          }"
+        />
+        <div *ngIf="f.PlayerName.errors?.required" class="invalid-feedback">
+          A descrição é obrigatória.
+        </div>
+        <div *ngIf="f.PlayerName.errors?.minlength" class="invalid-feedback">
+          O nome de usuário ter no minimo 6 caracteres
+        </div>
+        <div *ngIf="f.PlayerName.errors?.maxlength" class="invalid-feedback">
+          O nome de usuário deve ter no máximo 16 caracteres.
+        </div>
+        <input
+          formControlName="Email"
+          type="email"
+          placeholder="E-mail"
+          [ngClass]="{
+            'is-invalid': f.Email!.errors && f.Email!.touched
+          }"
+        />
+        <div *ngIf="f.Email.errors?.required" class="invalid-feedback">
+          O e-mail é obrigatório
+        </div>
+        <div *ngIf="f.Email.errors?.email" class="invalid-feedback">
+          Digite um e-mail válido.
+        </div>
+        <input
+          formControlName="Password"
+          type="password"
+          placeholder="Senha"
+          [ngClass]="{
+            'is-invalid': f.Password!.errors && f.Password!.touched
+          }"
+        />
+        <div *ngIf="f.Password.errors?.required" class="invalid-feedback">
+          A senha é obrigatória.
+        </div>
+        <div *ngIf="f.Password.errors?.minlength" class="invalid-feedback">
+          A senha precisa ter no minimo 6 caracteres.
+        </div>
+        <input
+          formControlName="PasswordConfirm"
+          type="password"
+          placeholder="Confirmar Senha"
+          [ngClass]="{
+            'is-invalid': f.PasswordConfirm!.errors && f.PasswordConfirm!.touched
+          }"
+        />
+        <div *ngIf="f.PasswordConfirm.errors?.required" class="invalid-feedback">
+          Confirme a senha.
+        </div>
+        <div *ngIf="f.PasswordConfirm.errors?.mustMatch" class="invalid-feedback">
+          As senhas não correspondem
+        </div>
+        <input
+          formControlName="ImageURL"
+          type="text"
+          placeholder="Foto de perfil"
+        />
+        <button class=" btn btn-secondary register" [disabled]="!formRegister.valid">Registrar-se</button>
       </form>
     </div>
     <div class="form-container sign-in-container">
@@ -29,9 +88,11 @@
         </div>
         <div class="overlay-panel overlay-right">
           <h1>Olá, jogador!</h1>
-          <p>Não possui uma conta ainda? Clique no botão a baixo e registre-se!</p>
+          <p>
+            Não possui uma conta ainda? Clique no botão a baixo e registre-se!
+          </p>
           <button class="ghost" id="signUp" (click)="registerForm()">
-            Registrar
+            Registro
           </button>
         </div>
       </div>

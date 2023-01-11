@@ -6,7 +6,7 @@ import { MatchesListComponent } from './components/matches/matches-list/matches-
 import { MatchesDetailsComponent } from './components/matches/matches-details/matches-details.component';
 import { PlayersComponent } from './components/players/players.component';
 import { UserComponent } from './components/user/user.component';
-import { ProfileComponent } from './components/profile/profile.component';
+import { ProfileComponent } from './components/user/profile/profile.component';
 import { LoginComponent } from './components/user/login/login.component';
 
 const routes: Routes = [
@@ -23,10 +23,10 @@ const routes: Routes = [
   {path: 'user', component: UserComponent,
     children: [
       {path: 'login', component: LoginComponent},
+      {path: 'profile', component: ProfileComponent},
 
     ]
   },
-  { path: 'user/profile', component: ProfileComponent},
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', redirectTo: 'home', pathMatch: 'full' },
 ];

@@ -1,22 +1,118 @@
-<div class="container">
-<div class="card">
-  <div class="card-header">
-    <img
-      src="../../../../assets/{{matches[2].LogoURL}}"
-      alt="rover"
-    />
+<div class="container" id="container">
+  <div class="card" id="card" *ngIf="!editing">
+    <div class="card-header">
+      <img src="../../../../assets/{{ matches[2]?.LogoURL }}" alt="rover" />
+    </div>
+    <div class="card-body">
+      <span class="tag tag-teal">FPS</span>
+      <h4>{{ matches[2]?.GameName }}</h4>
+      <p>{{ matches[2]?.Description }}</p>
+      <tr *ngFor="let player of matches[2]?.PlayerList">
+        <th>
+          <img class="user-img" src="{{ player.ImageURL }}" alt="" />{{
+            player.PlayerName
+          }}
+        </th>
+      </tr>
+      <div class="user">
+        <button class="btn btn-primary" style="color: white">Participar</button>
+        <button
+          class="btn btn-primary"
+          style="color: white"
+          (click)="editingMatch()"
+        >
+          Editar
+        </button>
+        <i class="fa-solid fa-arrow-left" routerLink="/matches"></i>
+      </div>
+    </div>
   </div>
-  <div class="card-body">
-    <span class="tag tag-teal">FPS</span>
-    <h4>{{matches[2].GameName}}</h4>
-    <p>{{matches[2].Description}}</p>
-    <tr *ngFor="let player of matches[2].PlayerList">
-      <td><img class="user-img" src="{{player.ImageURL}}" alt="">{{player.PlayerName}}</td>
-    </tr>
-    <div class="user">
-      <button class="btn btn-primary" style="color: white;">Participar</button>
-      <button class="btn btn-primary" style="color: white;" (click)="detalheMatch(matches[2]._id)">Editar</button>
-      <i class="fa-solid fa-arrow-left" routerLink="/matches"></i>
+  <div class="card" id="card" *ngIf="editing">
+    <form class="col" [formGroup]="form">
+      <div>
+        <fieldset class="form-group">
+          <legend class="d-flex justify-content-between capitalize">
+            <h3 class="edit-title">{{matches[2].GameName}}</h3>
+            <i
+              class="fa-solid fa-sharp fa-arrow-left my-1"
+              (click)="editingMatch()"
+            ></i>
+          </legend>
+          <div class="row">
+            <div class="form-group col-md-5">
+              <label>Jogo</label>
+              <select
+                #games (change)="onSelected()"
+                class="form-control"
+                formControlName="GameName"
+                style="font-size: 13px"
+                [ngClass]="{
+                  'is-invalid': f.GameName!.errors && f.GameName!.touched
+                }"
+              >
+                <option value="tarkov">Tarkov</option>
+                <option value="gartic">Gartic</option>
+                <option value="rocket">Rocket League</option>
+              </select>
+              <div
+                class="invalid-feedback"
+              >
+                Selecione um jogo.
+              </div>
+            </div>
+            <div class="form-group col-md-12">
+              <label>Descrição</label>
+              <textarea
+                type="text"
+                rows="4"
+                cols="50"
+                class="form-control"
+                formControlName="Description"
+                placeholder="Descrição da partida"
+                [ngClass]="{
+                  'is-invalid': f.Description!.errors && f.Description!.touched
+                }"
+              ></textarea>
+              <div
+                *ngIf="f.Description.errors?.required"
+                class="invalid-feedback"
+              >
+                A descrição é obrigatória.
+              </div>
+              <div
+                *ngIf="f.Description.errors?.minlength"
+                class="invalid-feedback"
+              >
+                A descrição deve ter no minimo 12 caracteres
+              </div>
+              <div
+                *ngIf="f.Description.errors?.maxlength"
+                class="invalid-feedback"
+              >
+                A descrição deve ter no máximo 50 caracteres.
+              </div>
+            </div>
+            <div class="form-group col-md-10">
+              <label>Data e Hora</label>
+              <input
+                type="datetime-local"
+                class="form-control"
+                formControlName="MatchDate"
+                style="font-size: 13px"
+                [ngClass]="{
+                  'is-invalid': f.MatchDate!.errors && f.MatchDate!.touched
+                }"
+              />
+              <div
+                class="invalid-feedback"
+              >
+                Escolha uma data e hora.
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+    </form>
+    <button type="submit" class="btn btn-primary confirm" [disabled]="!form.valid" (click)="console()">Atualizar</button>
   </div>
-</div>
 </div>

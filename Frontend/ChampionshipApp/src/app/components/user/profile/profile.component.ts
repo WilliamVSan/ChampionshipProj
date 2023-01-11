@@ -3,44 +3,38 @@ import { AbstractControlOptions, FormBuilder, FormGroup, Validators } from '@ang
 import { ValidatorField } from '@app/helpers/ValidatorField';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  selector: 'app-profile',
+  templateUrl: './profile.component.html',
+  styleUrls: ['./profile.component.scss']
 })
-export class LoginComponent implements OnInit {
-  constructor(private fb: FormBuilder) {}
+export class ProfileComponent implements OnInit {
 
-  public formRegister!: FormGroup;
+  constructor(private fb: FormBuilder) { }
+
+  editing: boolean = false;
+
+  public formEdit!: FormGroup;
 
   get f(): any {
-    return this.formRegister.controls;
+    return this.formEdit.controls;
   }
 
   ngOnInit(): void {
-    this.validationRegister();
+    this.validationEdit();
   }
 
-  registerForm() {
-    const signUpButton = document.getElementById('signUp');
-    const signInButton = document.getElementById('signIn');
-    const container = document.getElementById('container');
-
-    signUpButton?.addEventListener('click', () => {
-      container?.classList.add('right-panel-active');
-    });
-
-    signInButton?.addEventListener('click', () => {
-      container?.classList.remove('right-panel-active');
-    });
+  public editProfile(): void{
+    this.editing = !this.editing;
+    this.formEdit.reset();
   }
 
-  public validationRegister(): void {
+  public validationEdit(): void {
 
     const formOptions: AbstractControlOptions = {
       validators: ValidatorField.MustMatch('Password', 'PasswordConfirm')
     };
 
-    this.formRegister = this.fb.group({
+    this.formEdit = this.fb.group({
       PlayerName: [
         '',
         [
@@ -61,4 +55,5 @@ export class LoginComponent implements OnInit {
       ImageURL: [''],
     }, formOptions);
   }
+
 }

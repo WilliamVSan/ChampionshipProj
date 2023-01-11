@@ -1,7 +1,7 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -28,8 +28,8 @@ import { DateTimeFormatPipe } from './helpers/DateTimeFormat.pipe';
 import { MatchesDetailsComponent } from './components/matches/matches-details/matches-details.component';
 import { UserComponent } from './components/user/user.component';
 import { LoginComponent } from './components/user/login/login.component';
-import { RegistrationComponent } from './components/user/registration/registration.component';
 import { MatchesListComponent } from './components/matches/matches-list/matches-list.component';
+import { ProfileComponent } from './components/user/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -43,12 +43,13 @@ import { MatchesListComponent } from './components/matches/matches-list/matches-
     DateTimeFormatPipe,
     MatchesDetailsComponent,
     UserComponent,
+    ProfileComponent,
     LoginComponent,
-    RegistrationComponent,
     MatchesListComponent
   ],
   imports: [
     FormsModule,
+    ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule, //É o que possibilita utilizarmos dentro de nosso componente a referência do HTTP Client.

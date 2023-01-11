@@ -1,0 +1,203 @@
+<div class="screen">
+  <div class="container">
+    <div class="row">
+      <div class="profile-nav col-md-3">
+        <div class="panel">
+          <div class="user-heading round">
+            <a href="#">
+              <img
+                src="https://bootdey.com/img/Content/avatar/avatar3.png"
+                alt=""
+              />
+            </a>
+            <h1 class="mt-3">Will Smith</h1>
+          </div>
+          <ul class="nav nav-pills nav-stacked mt-1">
+            <button class="btn btn-primary" (click)="editProfile()">
+              <i class="fa fa-edit mr-3"></i> Edit profile
+            </button>
+          </ul>
+        </div>
+      </div>
+      <div *ngIf="!editing" class="profile-info col">
+        <div class="panel">
+          <div class="bio-graph-heading">
+            <h4>Perfil</h4>
+          </div>
+          <div class="panel-body bio-graph-info">
+            <div class="row">
+              <div class="bio-row">
+                <p><span>Nome:</span>Will Smith</p>
+              </div>
+              <div class="bio-row">
+                <p><span>Email:</span>will@email.com</p>
+              </div>
+              <div class="bio-row">
+                <p><span>Titulo: </span></p>
+              </div>
+              <div class="bio-row">
+
+              </div>
+              <div class="bio-row">
+                <tr class="test">
+                  <i class="fa fa-trophy mr-3"></i
+                  >Vitórias: 9
+                </tr>
+              </div>
+              <div class="bio-row">
+                <tr class="test">
+                  <i class="fa fa-hand-fist mr-3"></i>
+                  Pontos: 9
+                </tr>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="editing" class="profile-info col">
+        <div class="panel">
+          <div class="bio-graph-heading">
+            <h4>Editando Usuário</h4>
+          </div>
+          <div class="panel-body bio-graph-info">
+            <form [formGroup]="formEdit">
+              <div class="p-3">
+                <div class="form-row">
+                  <div class="form-group col-md-12">
+                    <label>E-mail</label>
+                    <input
+                      formControlName="Email"
+                      type="email"
+                      class="form-control"
+                      placeholder="exemplo@email.com"
+                      [ngClass]="{
+                        'is-invalid': f.Email!.errors && f.Email!.touched
+                      }"
+                    />
+                    <div
+                      *ngIf="f.Email.errors?.required"
+                      class="invalid-feedback"
+                    >
+                      O e-mail é obrigatório
+                    </div>
+                    <div *ngIf="f.Email.errors?.email" class="invalid-feedback">
+                      Digite um e-mail válido.
+                    </div>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label>Nome</label>
+                    <input
+                      formControlName="PlayerName"
+                      type="text"
+                      class="form-control"
+                      placeholder="usuario"
+                      [ngClass]="{
+                        'is-invalid':
+                          f.PlayerName!.errors && f.PlayerName!.touched
+                      }"
+                    />
+                    <div
+                      *ngIf="f.PlayerName.errors?.required"
+                      class="invalid-feedback"
+                    >
+                      A descrição é obrigatória.
+                    </div>
+                    <div
+                      *ngIf="f.PlayerName.errors?.minlength"
+                      class="invalid-feedback"
+                    >
+                      O nome de usuário ter no minimo 6 caracteres
+                    </div>
+                    <div
+                      *ngIf="f.PlayerName.errors?.maxlength"
+                      class="invalid-feedback"
+                    >
+                      O nome de usuário deve ter no máximo 16 caracteres.
+                    </div>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label>Imagem URL</label>
+                    <input
+                      formControlName="ImageURL"
+                      type="datetime"
+                      class="form-control"
+                      placeholder="Url da nova imagem"
+                    />
+                  </div>
+                </div>
+                <h6>Mudança de senha</h6>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label>Senha</label>
+                    <input
+                      formControlName="Password"
+                      type="password"
+                      class="form-control"
+                      placeholder="Nova senha"
+                      [ngClass]="{
+                        'is-invalid': f.Password!.errors && f.Password!.touched
+                      }"
+                    />
+                    <div
+                      *ngIf="f.Password.errors?.required"
+                      class="invalid-feedback"
+                    >
+                      A senha é obrigatória.
+                    </div>
+                    <div
+                      *ngIf="f.Password.errors?.minlength"
+                      class="invalid-feedback"
+                    >
+                      A senha precisa ter no minimo 6 caracteres.
+                    </div>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label>Confirmar Senha</label>
+                    <input
+                      formControlName="PasswordConfirm"
+                      type="password"
+                      class="form-control"
+                      placeholder="Nova senha"
+                      [ngClass]="{
+                        'is-invalid':
+                          f.PasswordConfirm!.errors &&
+                          f.PasswordConfirm!.touched
+                      }"
+                    />
+                    <div
+                      *ngIf="f.PasswordConfirm.errors?.required"
+                      class="invalid-feedback"
+                    >
+                      Confirme a senha.
+                    </div>
+                    <div
+                      *ngIf="f.PasswordConfirm.errors?.mustMatch"
+                      class="invalid-feedback"
+                    >
+                      As senhas não correspondem
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer">
+                <div class="d-flex">
+                  <button class="btn btn-outline-secondary mr-auto border" (click)="editProfile()">
+                    Cancelar Alteração
+                  </button>
+                  <button
+                    class="btn btn-outline-primary border"
+                    [disabled]="!formEdit.valid"
+                  >
+                    Salvar Evento
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -3,15 +3,20 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Match, MatchResponse } from 'src/app/models/Matches';
+import { MatchResponse } from 'src/app/models/Matches';
 import { Player, PlayerResponse } from 'src/app/models/Players';
 import { MatchService } from 'src/app/services/matches.service';
 import { PlayerService } from 'src/app/services/players.service';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-matches-details',
   templateUrl: './matches-details.component.html',
-  styleUrls: ['./matches-details.component.scss']
+  styleUrls: ['./matches-details.component.scss'],
 })
 export class MatchesDetailsComponent implements OnInit {
   public matches: MatchResponse[] = [];
@@ -20,9 +25,24 @@ export class MatchesDetailsComponent implements OnInit {
   public player!: PlayerResponse;
   public modalRef!: BsModalRef;
 
+  public form!: FormGroup;
+
   logoWidth: number = 120;
   showInfo: boolean = false;
+  editing: boolean = false;
+
+  selectedGame: any;
+  gameList: any[] = [
+    {Name: 'tarkov', Logo: 'tarkov.png', Cover: 'tarkov.jpg'},
+    {Name: 'gartic', Logo: 'gartic.png', Cover: 'gartic.png'},
+    {Name: 'rocket', Logo: 'rocket.png', Cover: 'rocket.jpg'}
+  ];
+
   private _filtroLista: string = '';
+
+  get f(): any{
+    return this.form.controls;
+  }
 
   public get filtroLista() {
     return this._filtroLista;
@@ -50,11 +70,13 @@ export class MatchesDetailsComponent implements OnInit {
     private modalService: BsModalService,
     private toastr: ToastrService,
     private spinner: NgxSpinnerService,
-    private router: Router
+    private router: Router,
+    private fb: FormBuilder
   ) {}
 
   //Dentro do ngOnInit, podemos colocar métodos que serão inicializados antes de valores serem atribuidos ao nosso HTML
   public ngOnInit(): void {
+    this.validation();
     this.spinner.show();
     setTimeout(() => {
       /** spinner ends after 5 seconds */
@@ -96,8 +118,8 @@ export class MatchesDetailsComponent implements OnInit {
       },
     });
   }
-  public getPlayer(){
-    this.playerService.getPlayerById("6390d1a69dfa4236e085942f").subscribe({
+  public getPlayer() {
+    this.playerService.getPlayerById('6390d1a69dfa4236e085942f').subscribe({
       next: (player: Player) => {
         this.player = player;
       },
@@ -108,7 +130,6 @@ export class MatchesDetailsComponent implements OnInit {
       },
       complete: () => {
         this.spinner.hide();
-        console.log(this.player);
       },
     });
   }
@@ -118,14 +139,47 @@ export class MatchesDetailsComponent implements OnInit {
     this.showInfo = !this.showInfo;
   }
 
-  public joinMatch(player: PlayerResponse, list: PlayerResponse[]){
-    list.push(player);
-    list.pop();
-    console.log(list);
+  public editingMatch(): void {
+    this.editing = !this.editing;
+    this.form.reset();
   }
 
   detalheMatch(id: string): void {
     this.router.navigate([`matches/detail/${id}`]);
+  }
+
+  public validation(): void {
+    this.form = this.fb.group({
+      GameName: ['', Validators.required],
+      Description: [
+        '',[
+        Validators.required,
+        Validators.minLength(12),
+        Validators.maxLength(50),
+      ]],
+      PlayerList: [''],
+      WinnerName: [''],
+      MatchDate: ['', Validators.required],
+      LogoURL: [''],
+      Cover: [''],
+    });
+  }
+
+  onSelected(): void {
+    this.selectedGame = this.form.get("GameName").value;
+    for(let game of this.gameList){
+      if(this.selectedGame == game.Name){
+        this.form.patchValue({
+          LogoURL: game.Logo,
+          Cover: game.Cover
+        })
+      }
     }
+  }
+
+  public console(){
+    console.log(this.selectedGame);
+    console.log(this.form);
+  }
 
 }
