@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using ChampionshiAPI.Data;
 using ChampionshiAPI.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -13,6 +15,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
 namespace ChampionshiAPI
@@ -31,10 +34,29 @@ namespace ChampionshiAPI
         {
 
             services.Configure<ChampionshipDatabaseSettings>(
-                Configuration.GetSection(nameof(ChampionshipDatabaseSettings)));
+                Configuration.GetSection(nameof(ChampionshipDatabaseSettings))
+            );
             
-            services.AddSingleton<IChampionshipDatabaseSettings>(sp =>
-                sp.GetRequiredService<IOptions<ChampionshipDatabaseSettings>>().Value);
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration.GetSection("JwtKey").ToString())),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
+            
+            services.AddSingleton<IChampionshipDatabaseSettings>(db =>
+                db.GetRequiredService<IOptions<ChampionshipDatabaseSettings>>().Value);
             
             services.AddSingleton<MatchService>();
             services.AddSingleton<PlayerService>();
@@ -64,6 +86,7 @@ namespace ChampionshiAPI
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             //Utilizando Cors e permitindo que qualquer acesso.

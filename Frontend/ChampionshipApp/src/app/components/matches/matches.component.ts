@@ -34,11 +34,9 @@ export class MatchesComponent implements OnInit {
   public ngOnInit(): void {
     this.spinner.show();
     setTimeout(() => {
-      /** spinner ends after 5 seconds */
     }, 3500);
     this.getMatches();
     this.getPlayers();
-    /** spinner starts on init */
   }
 
   public getMatches() {
@@ -54,7 +52,7 @@ export class MatchesComponent implements OnInit {
       },
       complete: () => {
         this.spinner.hide();
-      },
+      }
     });
   }
   public getPlayers() {

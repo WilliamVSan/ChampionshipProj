@@ -21,7 +21,7 @@ export class SidebarComponent implements OnInit {
       number: '2',
       name: 'Profile',
       icon: 'fa-solid fa-user-large',
-      route: 'user/profile'
+      route: `user/profile/`
     },
     {
       number: '3',

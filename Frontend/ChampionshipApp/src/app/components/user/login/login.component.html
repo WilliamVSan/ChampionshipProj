@@ -67,16 +67,16 @@
           type="text"
           placeholder="Foto de perfil"
         />
-        <button class=" btn btn-secondary register" [disabled]="!formRegister.valid">Registrar-se</button>
+        <button class=" btn btn-secondary register" [disabled]="!formRegister.valid" (click)="registerUser()">Registrar-se</button>
       </form>
     </div>
     <div class="form-container sign-in-container">
-      <form action="#">
+      <form [formGroup]="formLogin">
         <h1>Faça o Login</h1>
-        <input type="email" placeholder="Email" />
-        <input type="password" placeholder="Senha" />
+        <input name="Email" formControlName="Email" type="email" placeholder="Email" />
+        <input name="Password" formControlName="Password" type="password" placeholder="Senha" />
         <a href="#">Perdeu a sua senha?</a>
-        <button>Logar</button>
+        <button (click)="login()" >Logar</button>
       </form>
     </div>
     <div class="overlay-container">

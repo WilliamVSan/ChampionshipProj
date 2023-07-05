@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ChampionshiAPI.Data;
 using ChampionshiAPI.Models;
+using Microsoft.Extensions.Configuration;
 using MongoDB.Driver;
 
 namespace ChampionshiAPI.Services
@@ -12,11 +13,12 @@ namespace ChampionshiAPI.Services
     {
         private readonly IMongoCollection<Match> _matches;
         private readonly PlayerService _playerService;
-        public MatchService(IChampionshipDatabaseSettings settings, PlayerService playerService)
+        public MatchService(IConfiguration configuration, PlayerService playerService)
         {
-            var client = new MongoClient(settings.ConnectionString);
-            var database = client.GetDatabase(settings.DatabaseName);
-            _matches = database.GetCollection<Match>(settings.MatchesCollectionName);
+            var client = new MongoClient(configuration.GetConnectionString("ChampionshipDb"));
+            var database = client.GetDatabase("Championship");
+
+            _matches = database.GetCollection<Match>("Matches");
             _playerService = playerService;
         }
         /// <summary>

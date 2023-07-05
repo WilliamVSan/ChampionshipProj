@@ -15,7 +15,7 @@ namespace ChampionshiAPI.Data
     public interface IChampionshipDatabaseSettings
     {
         string MatchesCollectionName { get; set; }
-        public string PlayersCollectionName { get; set; }
+        string PlayersCollectionName { get; set; }
         string ConnectionString { get; set; }
         string DatabaseName { get; set; }
     }

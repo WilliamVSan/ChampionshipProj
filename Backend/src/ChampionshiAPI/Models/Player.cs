@@ -16,7 +16,7 @@ namespace ChampionshiAPI.Models
         public string Email { get; set; }
         public string Password { get; set; }
         public string ImageURL { get; set; }
-        public int? TotalPoints { get; set; }
-        public int? Wins { get; set; }
+        public int? TotalPoints { get; set; } = 0;
+        public int? Wins { get; set; } = 0;
     }
 }

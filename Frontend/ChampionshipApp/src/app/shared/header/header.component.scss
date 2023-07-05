@@ -5,6 +5,31 @@ nav {
   height: 100%;
 }
 
+.btn-primary{
+  font-size: 20px;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.btn-secondary{
+  font-size: 20px;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.modal-header{
+  background-color: $secondary;
+  color: white;
+}
+
+.modal-body{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
 .side-nav-button {
   display: flex;
   justify-content: center;
@@ -24,4 +49,11 @@ nav {
 .navbar-brand:hover{
   color: #6045AF;
   text-shadow: 2px 2px 0 white;;
+}
+
+.fa-right-from-bracket{
+  color: white;
+  margin-right: 10px;
+  font-size: 30px;
+  cursor: pointer;
 }

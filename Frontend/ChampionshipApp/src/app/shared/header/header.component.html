@@ -9,7 +9,19 @@
       [isAnimated]="true"
       id="navbarSupportedContent"
     >
-      <a class="navbar-brand px-4" href="home">AMT</a>
+      <a class="navbar-brand px-4" routerLink="home">AMT</a>
     </div>
+    <i *ngIf="showLogout()" class="fa-solid fa-right-from-bracket" (click)="openModal(template)"></i>
   </div>
 </nav>
+
+<!-- Modal -->
+<ng-template #template>
+  <div class="modal-header">Deseja realmente se deslogar?</div>
+  <div class="modal-body">
+    <button class="btn-primary" (click)="logout()">Confirmar</button>
+    <button class="btn-secondary" aria-label="Close" (click)="modalRef.hide()">
+      Cancelar
+    </button>
+  </div>
+</ng-template>

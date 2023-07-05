@@ -1,6 +1,6 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -10,7 +10,7 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalModule } from 'ngx-bootstrap/modal';
 
-import { NgxSpinnerModule } from "ngx-spinner";
+import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToastrModule } from 'ngx-toastr';
 
 import { AppComponent } from './app.component';
@@ -30,6 +30,7 @@ import { UserComponent } from './components/user/user.component';
 import { LoginComponent } from './components/user/login/login.component';
 import { MatchesListComponent } from './components/matches/matches-list/matches-list.component';
 import { ProfileComponent } from './components/user/profile/profile.component';
+import { AuthInterceptor } from './shared/authconfig.interceptor';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,7 @@ import { ProfileComponent } from './components/user/profile/profile.component';
     UserComponent,
     ProfileComponent,
     LoginComponent,
-    MatchesListComponent
+    MatchesListComponent,
   ],
   imports: [
     FormsModule,
@@ -62,11 +63,15 @@ import { ProfileComponent } from './components/user/profile/profile.component';
       timeOut: 3000,
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,
-      progressBar: true
+      progressBar: true,
     }),
-    NgxSpinnerModule
+    NgxSpinnerModule,
   ],
-  providers: [MatchService, PlayerService],
+  providers: [
+    MatchService,
+    PlayerService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
